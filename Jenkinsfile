@@ -26,7 +26,7 @@ pipeline {
         stage ('Test') {
             steps {
                 sh '''
-                venv/bin/python -m pytest --maxfail=1 --disable-warning
+                venv/bin/python -m pytest --maxfail=1 
                 '''
             }
         }
