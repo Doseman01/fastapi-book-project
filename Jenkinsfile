@@ -1,3 +1,4 @@
+
 pipeline {
     agent {
         docker {
@@ -8,7 +9,9 @@ pipeline {
         stage ('Checkout') {
             steps {
                 checkout scmGit(
-                    branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/Doseman01/fastapi-book-project.git']])
+                    branches: [[name: '*/main']], 
+                    userRemoteConfigs: [[url: 'https://github.com/Doseman01/fastapi-book-project.git']]
+                )
             }
         }
         stage('Install dependencies') {
@@ -23,9 +26,9 @@ pipeline {
         stage ('Test') {
             steps {
                 sh '''
-                source venv/bin/activate
-                pytest
+                venv/bin/python -m pytest
                 '''
+            }
         }
     }
 }
