@@ -1,5 +1,9 @@
 pipeline {
-    agent any 
+    agent {
+        docker {
+            image 'python3.9'
+        }
+    }
     stages {
         stage ('Checkout') {
             steps {
@@ -9,21 +13,12 @@ pipeline {
         }
         stage('Install dependencies') {
             steps {
-                sh '''
-                apt-get install -y python3.9 python-pip 
-                python3 -m venv venv
-                source venv/bin/activate
-                pip install --upgrade pip
-                pip install -r requirements
-                '''          
+                sh 'pip install -r requirements'      
             }
         }
         stage ('Test') {
             steps {
-                sh '''
-                source venv/bin/activate
-                pytest
-                '''
+                sh 'pytest'
             }
         }
     }
