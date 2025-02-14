@@ -9,12 +9,21 @@ pipeline {
         }
         stage('Install dependencies') {
             steps {
-                sh 'pipx install -r requirements.txt'
+                sh '''
+                apt-get install -y python3.9 python-pip 
+                python3 -m venv venv
+                source venv/bin/activate
+                pip install --upgrade pip
+                pip install -r requirements
+                '''          
             }
         }
         stage ('Test') {
             steps {
-                sh 'pytest'
+                sh '''
+                source venv/bin/activate
+                pytest
+                '''
             }
         }
     }
