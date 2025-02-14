@@ -4,7 +4,7 @@ pipeline {
         stage ('Checkout') {
             steps {
                 checkout scmGit(
-                    branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/Doseman01/fastapi-book-project.git']])
+                    branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/Doseman01/fastapi-book-project.git']])
             }
         }
         stage('Install dependencies') {
